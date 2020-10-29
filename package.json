@@ -1,0 +1,18 @@
+{
+  "name": "apiproxy",
+  "version": "1.0.0",
+  "description": "An API Proxy to allow all my APIs to work within my network",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index",
+    "dev": "nodemon index"
+  },
+  "author": "Onik Noor",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
