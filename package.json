@@ -4,7 +4,11 @@
   "description": "An API Proxy to allow all my APIs to work within my network",
   "main": "index.js",
   "scripts": {
-    "start" : "node index",
+    "build": "npm build",
+    "clean": "rm -rf node_modules",
+    "reinstall": "npm run clean && npm install",
+    "rebuild": "npm run clean && npm install && npm run build",
+    "start": "node index",
     "dev": "nodemon index"
   },
   "author": "Onik Noor",
@@ -13,6 +17,7 @@
     "nodemon": "^2.0.6"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "http-proxy": "^1.18.1"
   }
 }
