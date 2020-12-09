@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 
-app.use("/LmaooApi", require("./LmaooAPI/controller"));
+app.use("/lmaooApi", require("./LmaooAPI/controller"));
+app.use("/auth", require("./Auth/index"));
 
 app.use("/", (req, res) => res.status(404).json());
 
