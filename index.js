@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.use("/Lmaoo", require("./Lmaoo/controller"));
+app.use("/LmaooApi", require("./LmaooAPI/controller"));
 
 app.use("/", (req, res) => res.status(404).json());
 

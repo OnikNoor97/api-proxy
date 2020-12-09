@@ -2,11 +2,9 @@ require('dotenv').config();
 const express = require("express");
 const router = express.Router();
 const httpProxy = require("http-proxy");
-
 var proxy = httpProxy.createProxyServer(this.options);
-var devMode = true;
 
-if (devMode) {
+if (process.env.DEV_MODE) {
     var env = process.env.DEV_ENV;
     var server = process.env.DEV_SERVER;
 }
@@ -21,11 +19,16 @@ const ticketControllerURL = `http://${server}/Workstation/${env}/lmaoo/Ticket/ti
 const adminControllerURL = `http://${server}/Workstation/${env}/lmaoo/Admin/adminController.php`
 
 router.use("/User", (req, res) => {
-    if (req.headers.authorization != "cojL6fOhdbO/rLg2JEWCng==") // Random one made for testing purposes
+    if (req.headers["clientid"] == null || req.headers["clientid"]  == undefined) 
     {
-        res.status(403).json({ message: "Seems like your Access Token has expired, logout and login again!" })
+        res.status(400).json()
     }
-    else {
+    // else if (req.headers.authorization != "cojL6fOhdbO/rLg2JEWCng==") // Random one made for testing purposes
+    // {
+    //     res.status(401).json({ message: "Not Authorized" })
+    // }
+    else 
+    {
         proxy.web(req, res, { target: userControllerURL })
     }
 });
