@@ -79,4 +79,15 @@ router.use("/authenticate", (req, res) =>
     }
 })
 
-module.exports = router, checkIPAddress;
+module.exports = router;
+
+module.exports.checkIPAddress = async function checkIPAddress(ip)
+{
+    var sql = "SELECT ipAddress FROM client WHERE ipAddress = ?";
+
+    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table });
+    const promisePool = await pool.promise();
+
+    let [rows, fields] = await promisePool.query(sql, [ip]);
+    return rows.length;
+};
