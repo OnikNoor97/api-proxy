@@ -13,7 +13,7 @@ app.use("/lmaoo", (req, res) =>
     var ip = req.header("CF-Connecting-IP");
     auth.checkIPAddress(ip).then((check) =>
     {
-        if (check == 0) res.status(400).json();
+        if (check == 0) res.status(401).json();
         else
         {
             proxy.web(req, res, { target: `http://${process.env.DEV_SERVER}/Workstation/QA/lmaoo` })
@@ -22,7 +22,6 @@ app.use("/lmaoo", (req, res) =>
 })
 
 app.use("/", (req, res) => { res.status(404).json(); })
-
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT);
