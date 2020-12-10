@@ -23,21 +23,11 @@ async function checkClientId(clientId)
 {
     var sql = "SELECT clientId FROM client WHERE clientId = ?";
 
-    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table });
+    const pool = mysql.createConnection({ host: server, user: dbUsername, password: dbPassword, database: table });
     const promisePool = await pool.promise();
 
     let [rows, fields] = await promisePool.query(sql, [clientId]);
-    return rows.length;
-}
-
-async function checkIPAddress(ip) // This is for other methods outside of this File
-{
-    var sql = "SELECT ipAddress FROM client WHERE ipAddress = ?";
-
-    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table });
-    const promisePool = await pool.promise();
-
-    let [rows, fields] = await promisePool.query(sql, [ip]);
+    pool.end();
     return rows.length;
 }
 
@@ -45,10 +35,11 @@ async function updateIpAddress(ip, clientId)
 {
     var sql = "UPDATE client SET ipAddress = ? WHERE clientId = ?";
 
-    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table, connectionLimit: 10 });
+    const pool = mysql.createConnection({ host: server, user: dbUsername, password: dbPassword, database: table });
     const promisePool = pool.promise();
 
     let [rows, fields] = await promisePool.query(sql, [ip, clientId]);
+    pool.end();
     return rows.changedRows;
 }
 
@@ -85,9 +76,10 @@ module.exports.checkIPAddress = async function checkIPAddress(ip)
 {
     var sql = "SELECT ipAddress FROM client WHERE ipAddress = ?";
 
-    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table });
+    const pool = mysql.createConnection({ host: server, user: dbUsername, password: dbPassword, database: table, connectionLimit: 10 });
     const promisePool = await pool.promise();
 
     let [rows, fields] = await promisePool.query(sql, [ip]);
+    pool.end();
     return rows.length;
 };
