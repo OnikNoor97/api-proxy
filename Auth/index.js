@@ -45,7 +45,7 @@ async function updateIpAddress(ip, clientId)
 {
     var sql = "UPDATE client SET ipAddress = ? WHERE clientId = ?";
 
-    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table });
+    const pool = mysql.createPool({ host: server, user: dbUsername, password: dbPassword, database: table, connectionLimit: 10 });
     const promisePool = pool.promise();
 
     let [rows, fields] = await promisePool.query(sql, [ip, clientId]);
