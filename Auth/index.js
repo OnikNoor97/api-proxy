@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require("express");
 const router = express.Router();
 const mysql = require('mysql2');
+const rateLimit = require("express-rate-limit");
+const slowDown = require("express-slow-down");
 
 if (process.env.DEV_MODE)
 {
@@ -18,16 +20,15 @@ else
     var table = process.env.PRODUCTION_DB_TABLE;
 }
 
-
 async function checkClientId(clientId)
 {
     var sql = "SELECT clientId FROM client WHERE clientId = ?";
 
     const pool = mysql.createConnection({ host: server, user: dbUsername, password: dbPassword, database: table });
     const promisePool = await pool.promise();
-
     let [rows, fields] = await promisePool.query(sql, [clientId]);
     pool.end();
+
     return rows.length;
 }
 
@@ -37,13 +38,27 @@ async function updateIpAddress(ip, clientId)
 
     const pool = mysql.createConnection({ host: server, user: dbUsername, password: dbPassword, database: table });
     const promisePool = pool.promise();
-
     let [rows, fields] = await promisePool.query(sql, [ip, clientId]);
     pool.end();
+
     return rows.changedRows;
 }
 
-router.use("/authenticate", (req, res) =>
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    keyGenerator: (req) => { return req.header("CF-Connecting-IP"); },
+    handler: (req, res) => res.status(429).json({ Message: "Too Many Requests!" })
+});
+
+const authSpeedLimiter = slowDown({
+    windowMs: 15 * 60 * 1000,
+    delayAfter: 2,
+    delayMs: 500,
+    keyGenerator: (req) => { return req.header("CF-Connecting-IP"); }
+});
+
+router.use("/authenticate", limiter, authSpeedLimiter, (req, res) =>
 {
     var clientId = req.query.clientId;
     var ipAddress = req.header("CF-Connecting-IP");
