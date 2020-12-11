@@ -93,8 +93,8 @@ module.exports.checkIPAddress = async function checkIPAddress(ip)
 
     const pool = mysql.createConnection({ host: server, user: dbUsername, password: dbPassword, database: table, connectionLimit: 10 });
     const promisePool = await pool.promise();
-
     let [rows, fields] = await promisePool.query(sql, [ip]);
     pool.end();
+
     return rows.length;
 };
