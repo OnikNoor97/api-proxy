@@ -63,10 +63,7 @@ router.use("/authenticate", limiter, authSpeedLimiter, (req, res) =>
     var clientId = req.query.clientId;
     var ipAddress = req.header("CF-Connecting-IP");
 
-    if (clientId == undefined || ipAddress == undefined)
-    {
-        res.status(400).json();
-    }
+    if (clientId == undefined || ipAddress == undefined) res.status(400).json();
     else
     {
         checkClientId(clientId).then(rep =>
