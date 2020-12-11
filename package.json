@@ -9,7 +9,8 @@
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "debug": "nodemon --inspect index.js"
   },
   "author": "Onik Noor",
   "license": "ISC",
@@ -19,6 +20,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "express-slow-down": "^1.4.0",
     "http-proxy": "^1.18.1",
     "mysql2": "^2.2.5"
   }
