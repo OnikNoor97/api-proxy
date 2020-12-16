@@ -8,7 +8,7 @@ require('dotenv').config();
 app.use("/lmaooApi", require("./LmaooAPI/controller"));
 app.use("/auth", require("./Auth/index"));
 
-app.use("/lmaoo", (req, res) =>
+app.use("/lmaoo", auth.limiter, auth.authSpeedLimiter, (req, res) =>
 {
     var ip = req.header("CF-Connecting-IP");
     auth.checkIPAddress(ip).then(check =>
