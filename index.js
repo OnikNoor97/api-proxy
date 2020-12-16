@@ -11,7 +11,7 @@ app.use("/auth", require("./Auth/index"));
 app.use("/lmaoo", (req, res) =>
 {
     var ip = req.header("CF-Connecting-IP");
-    auth.checkIPAddress(ip).then((check) =>
+    auth.checkIPAddress(ip).then(check =>
     {
         if (check == 0) res.status(401).json();
         else
