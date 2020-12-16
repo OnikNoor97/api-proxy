@@ -10,6 +10,7 @@ app.use("/auth", require("./Auth/index"));
 
 app.use("/lmaoo", (req, res) =>
 {
+    console.log(auth);
     var ip = req.header("CF-Connecting-IP");
     auth.checkIPAddress(ip).then((check) =>
     {

@@ -83,6 +83,8 @@ router.use("/authenticate", limiter, authSpeedLimiter, (req, res) =>
 })
 
 module.exports = router;
+module.exports.limiter = limiter;
+module.exports.authSpeedLimiter = authSpeedLimiter;
 
 module.exports.checkIPAddress = async function checkIPAddress(ip)
 {
