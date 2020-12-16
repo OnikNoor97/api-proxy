@@ -45,8 +45,8 @@ async function updateIpAddress(ip, clientId)
 }
 
 const limiter = rateLimit({
-    windowMs: 30 * 60 * 1000,
-    max: 30,
+    windowMs: 10 * 60 * 1000,
+    max: 50,
     keyGenerator: (req) => { return req.header("CF-Connecting-IP"); },
     handler: (req, res) => res.status(429).json({ Message: "Too Many Requests!" })
 });
@@ -55,6 +55,7 @@ const authSpeedLimiter = slowDown({
     windowMs: 30 * 60 * 1000,
     delayAfter: 2,
     delayMs: 1000,
+    skipSuccessfulRequests: true,
     keyGenerator: (req) => { return req.header("CF-Connecting-IP"); }
 });
 
