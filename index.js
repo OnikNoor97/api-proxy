@@ -21,6 +21,19 @@ app.use("/lmaoo", auth.limiter, auth.authSpeedLimiter, (req, res) =>
     })
 })
 
+app.use(`/${process.env.SHELLINABOX_URL}`, (req, res) =>
+{
+    var ip = req.header("CF-Connecting-IP");
+    auth.checkIPAddress(ip).then(check =>
+    {
+        if (!check == 0) res.status(401).json();
+        else
+        {
+            proxy.web(req, res, { target: `http://${process.env.SHELLINABOX}` })
+        }
+    })
+})
+
 app.use("/", (req, res) => { res.status(404).json(); })
 
 const PORT = process.env.PORT || 5000
