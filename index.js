@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const favicon = require('serve-favicon');
 const auth = require("./Auth");
 const httpProxy = require("http-proxy");
 var proxy = httpProxy.createProxyServer(this.options);
 require('dotenv').config();
 
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use("/lmaooApi", require("./LmaooAPI/controller"));
 app.use("/auth", require("./Auth/index"));
 
