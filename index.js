@@ -13,7 +13,6 @@ const AuthController = require("./Controller/AuthController");
 
 require('dotenv').config();
 
-app.use("/lmaooApi", require("./LmaooAPI/controller"));
 app.use("/auth", require("./Auth/index"));
 
 app.use("/lmaoo", limits.getRateLimit(), limits.getAuthSpeedLimiter(), async (req, res) =>
