@@ -17,6 +17,14 @@ class AuthController
         var parameters = [ip, clientId];
 
         return db.getUpdatedRows(sql, parameters);
+    } 
+    
+    static async checkIPAddress(ip)
+    {
+        var sql = "SELECT ipAddress FROM client WHERE ipAddress = ?";
+        var parameters = [ip];
+
+        return db.getLength(sql, parameters);
     }
 }
 
