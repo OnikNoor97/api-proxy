@@ -13,37 +13,32 @@ const AuthController = require("./Controller/AuthController");
 
 require('dotenv').config();
 
-
 app.use("/lmaooApi", require("./LmaooAPI/controller"));
 app.use("/auth", require("./Auth/index"));
 
-app.use("/lmaoo", auth.limiter, auth.authSpeedLimiter, (req, res) =>
+app.use("/lmaoo", limits.getRateLimit(), limits.getAuthSpeedLimiter(), async (req, res) =>
 {
     var ip = req.header("CF-Connecting-IP");
-    auth.checkIPAddress(ip).then(check =>
-    {
-        if (check == 0) res.status(401).json();
-        else
-        {
-            proxy.web(req, res, { target: `http://localhost/lmaoo/src` })
-        }
-    })
+
+    if (req.url == "/") res.redirect("/lmaoo/Home/index.php")
+
+    await AuthController.checkIPAddress(ip) == 0
+    ? res.status(401).json()
+    : proxy.web(req, res, { target: `http://localhost/lmaoo/src` });
+    
 })
 
-app.use(`/${process.env.SHELLINABOX_URL}`, (req, res) =>
+app.use(`/${process.env.SHELLINABOX_URL}`, async (req, res) =>
 {
     var ip = req.header("CF-Connecting-IP");
-    auth.checkIPAddress(ip).then(check =>
-    {
-        if (check == 0) res.status(401).json();
-        else
-        {
-            proxy.web(req, res, { target: `http://${process.env.SHELLINABOX}` })
-        }
-    })
+
+    if (req.url == "/") res.redirect("/lmaoo/Home/index.php")
+
+    await AuthController.checkIPAddress(ip) == 0
+    ? res.status(401).json()
+    : proxy.web(req, res, { target: `http://${process.env.SHELLINABOX}` });
 })
 
-app.use("/", auth.limiter, auth.authSpeedLimiter, (req, res) => { res.status(404).json(); })
+app.use("/", limits.getRateLimit(), limits.getAuthSpeedLimiter(), (req, res) => { res.status(404).json(); })
 
-const PORT = process.env.PORT || 5000
-app.listen(PORT);
+app.listen(process.env.PORT || 5000);
