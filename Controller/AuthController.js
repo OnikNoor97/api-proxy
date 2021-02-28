@@ -26,6 +26,18 @@ class AuthController
 
         return db.getLength(sql, parameters);
     }
+
+    static async authMiddleware(req, res, next)
+    {
+        var ip = req.header("CF-Connecting-IP");
+
+        if(await AuthController.checkIPAddress(ip) == 0)
+        {
+            res.status(401).json(); return;
+        }
+
+        next();
+    }
 }
 
 module.exports = AuthController;
