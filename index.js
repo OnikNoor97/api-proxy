@@ -16,6 +16,8 @@ app.use("/auth", require("./Auth/index"));
 
 app.use("/lmaoo", limits.getRateLimit(), limits.getAuthSpeedLimiter(), AuthController.authMiddleware, async (req, res) =>
 {
+    if (req.url == "/") res.redirect("/lmaoo/Home/index.php")
+    
     proxy.web(req, res, { 
         target: `http://localhost/lmaoo/src` 
     });
