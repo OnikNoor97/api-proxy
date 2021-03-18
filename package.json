@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An API Proxy to allow all my APIs to work within my network",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OnikNoor97/api-proxy.git"
+  },
   "scripts": {
     "build": "npm build",
     "clean": "rm -rf node_modules",
@@ -19,11 +23,15 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",
+    "express-session": "^1.17.1",
     "express-slow-down": "^1.4.0",
+    "http": "0.0.1-security",
     "http-proxy": "^1.18.1",
     "mysql2": "^2.2.5",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^4.0.0"
   }
 }
