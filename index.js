@@ -1,5 +1,10 @@
 const express = require("express");
 const app = express();
+app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/public');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+
 const auth = require("./Auth");
 require('dotenv').config();
 
@@ -13,6 +18,7 @@ var limits = require("./Controller/LimitController");
 const AuthController = require("./Controller/AuthController");
 
 app.use("/auth", require("./Auth/index"));
+app.use("/wsAuth", require("./wsAuth/index"));
 
 app.use("/lmaoo", limits.getRateLimit(), limits.getAuthSpeedLimiter(), AuthController.authMiddleware, async (req, res) =>
 {
