@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-var limits = require("../Controller/LimitController");
-var AuthController = require("../Controller/AuthController");
+var limits = require("../Middleware/Limit");
+var AuthController = require("../Middleware/Auth");
 
 router.use("/authenticate", limits.getRateLimit(), limits.getAuthSpeedLimiter(), async (req, res) => {
     var clientId = req.query.clientId;
