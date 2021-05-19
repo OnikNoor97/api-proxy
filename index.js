@@ -27,15 +27,17 @@ app.use("/lmaoo", limits.getRateLimit(), limits.getAuthSpeedLimiter(), AuthContr
     proxy.web(req, res, { 
         target: `http://localhost/lmaoo/src` 
     });
-})
+});
 
 app.use(`/${process.env.SHELLINABOX_URL}`, AuthController.authMiddleware, (req, res) =>
 {
     proxy.web(req, res, { 
         target: `http://${process.env.SHELLINABOX}` 
     });
-})
+});
 
-app.use("*", limits.getRateLimit(), limits.getAuthSpeedLimiter(), AuthController.authMiddleware, (req, res) => { res.status(404).json(); })
+app.use("*", limits.getRateLimit(), limits.getAuthSpeedLimiter(), AuthController.authMiddleware, (req, res) => { 
+    res.status(404).json({ Message: "Endpoint not valid"}); 
+});
 
 app.listen(process.env.PORT || 5000);
