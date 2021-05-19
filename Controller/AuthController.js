@@ -1,7 +1,7 @@
 const Database = require("./DatabaseController");
 const db = new Database();
 
-class AuthController 
+module.exports = class AuthController 
 {
     static async checkClientId(clientId)
     {
@@ -26,18 +26,4 @@ class AuthController
 
         return db.getLength(sql, parameters);
     }
-
-    static async authMiddleware(req, res, next)
-    {
-        var ip = req.header("CF-Connecting-IP");
-
-        if(await AuthController.checkIPAddress(ip) == 0)
-        {
-            res.status(401).json(); return;
-        }
-
-        next();
-    }
 }
-
-module.exports = AuthController;
