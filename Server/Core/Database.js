@@ -11,7 +11,7 @@ module.exports = class Database {
     async create(sql) {
         const pool = mysql.createConnection({ host: this.server, user: this.username, password: this.password, database: this.table });
         const promisePool = pool.promise();
-        let [rows] = await promisePool.query(sql);
+        let [rows] = await promisePool.execute(sql);
         pool.end();
     
         return rows.affectedRows;
@@ -20,7 +20,7 @@ module.exports = class Database {
     async read(sql) {
         const pool = mysql.createConnection({ host: this.server, user: this.username, password: this.password, database: this.table });
         const promisePool = await pool.promise();
-        let [rows] = await promisePool.query(sql);
+        let [rows] = await promisePool.execute(sql);
         pool.end();
     
         return rows;
@@ -29,7 +29,7 @@ module.exports = class Database {
     async update(sql) {
         const pool = mysql.createConnection({ host: this.server, user: this.username, password: this.password, database: this.table });
         const promisePool = pool.promise();
-        let [rows] = await promisePool.query(sql);
+        let [rows] = await promisePool.execute(sql);
         pool.end();
     
         return rows.changedRows;
@@ -38,7 +38,7 @@ module.exports = class Database {
     async delete(sql) {
         const pool = mysql.createConnection({ host: this.server, user: this.username, password: this.password, database: this.table });
         const promisePool = pool.promise();
-        let [rows] = await promisePool.query(sql);
+        let [rows] = await promisePool.execute(sql);
         pool.end();
     
         return rows.changedRows;
