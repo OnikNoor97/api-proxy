@@ -9,9 +9,10 @@ module.exports = class Log extends BaseModel {
 
     async read(conditions) {
         let query = (arguments.length == 0)
-        ? this.sql.select(this.columns)
-        : this.sql.select(this.columns).where(conditions);
+        ? this.sql.select("Log", this.columns).text
+        : this.sql.select("Log", this.columns).where(conditions).text;
 
-        return await this.db.read(query);
+        let results = await this.db.read(query);
+        return results;
     }
 }
