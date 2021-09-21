@@ -10,7 +10,7 @@
     "rebuild": "npm run clean && npm install && npm run build",
     "start": "node index",
     "dev": "nodemon Server/index",
-    "debug": "nodemon --inspect index.js"
+    "debug": "nodemon --inspect Server/index.js"
   },
   "author": "Onik Noor",
   "license": "ISC",
