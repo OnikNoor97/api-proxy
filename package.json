@@ -9,7 +9,7 @@
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
     "start": "node index",
-    "dev": "nodemon index",
+    "dev": "nodemon Server/index",
     "debug": "nodemon --inspect index.js"
   },
   "author": "Onik Noor",
