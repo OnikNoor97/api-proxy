@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-class Config {
+module.exports = class Config {
     constructor() {
         this.MYSQL_SERVER = process.env.MYSQL_SERVER;
         this.MYSQL_USERNAME = process.env.MYSQL_USERNAME;
@@ -8,5 +8,3 @@ class Config {
         this.MYSQL_TABLE = process.env.MYSQL_TABLE;
     }
 }
-
-module.exports = Config;

@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-class Database {
+module.exports = class Database {
     constructor(server, username, password, table) {
         this.server = server;
         this.username = username;
@@ -44,5 +44,3 @@ class Database {
         return rows.changedRows;
     }
 }
-
-module.exports = Database;
