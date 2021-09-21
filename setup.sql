@@ -1,0 +1,1 @@
+-- Run this when you are running SQL Docker for the first time
