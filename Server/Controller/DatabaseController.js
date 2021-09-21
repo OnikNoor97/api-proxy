@@ -20,26 +20,6 @@ class DatabaseController
             this.table = process.env.PRODUCTION_DB_TABLE;
         }
     }
-
-    async getLength(sql, parameters)
-    {
-        const pool = mysql.createConnection({ host: this.server, user: this.dbUsername, password: this.dbPassword, database: this.table });
-        const promisePool = await pool.promise();
-        let [rows, fields] = await promisePool.query(sql, parameters);
-        pool.end();
-    
-        return rows.length;
-    }
-
-    async getUpdatedRows(sql, parameters)
-    {
-        const pool = mysql.createConnection({ host: this.server, user: this.dbUsername, password: this.dbPassword, database: this.table });
-        const promisePool = pool.promise();
-        let [rows, fields] = await promisePool.query(sql, parameters);
-        pool.end();
-    
-        return rows.changedRows;
-    }
 }
 
 module.exports = DatabaseController;
