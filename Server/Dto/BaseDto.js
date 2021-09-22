@@ -3,7 +3,7 @@ const db = require("../Core/Database");
 const sql = require('sql-query-generator')
 sql.use("mysql");
 
-module.exports = class BaseModel extends Config {
+module.exports = class BaseDto extends Config {
     constructor() {
         super();
         this.db = new db(this.MYSQL_SERVER, this.MYSQL_USERNAME, this.MYSQL_ROOT_PASSWORD, this.MYSQL_TABLE);
