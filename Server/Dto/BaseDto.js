@@ -1,6 +1,6 @@
 const Config = require("../Core/Config");
 const db = require("../Core/Database");
-const sql = require('sql-query-generator')
+const sql = require('sql-query-generator');
 sql.use("mysql");
 
 module.exports = class BaseDto extends Config {
