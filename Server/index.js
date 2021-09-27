@@ -9,4 +9,16 @@ app.get("/", async (req, res) => {
     res.status(200).json(logs);
 });
 
+// Error handling
+app.use((err, req, res, next) => {
+    console.error(err);
+
+    if (err instanceof APIError) {
+        res.status(err.code).json(err.message);
+        return;
+    }
+
+    res.status(500).json({ Message : "Something went wrong"})
+})
+
 app.listen(5000);
