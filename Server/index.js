@@ -1,23 +1,23 @@
 const express = require("express");
-const LogController = require("./Controller/LogController");
 const app = express();
+
+const LogController = require("./Controller/LogController");
+const APIError = require("./Core/APIError");
+
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-app.get("/", async (req, res) => {
-    let logs = await new LogController().readLog(req);
-    res.status(200).json(logs);
-});
+// Handling 404s 
+app.use("*", (req, res, next) => {
+    return next(APIError.notFound());
+})
 
 // Error handling
 app.use((err, req, res, next) => {
+
+    if (err instanceof APIError) return res.status(err.code).json({ Message: err.message });   
+
     console.error(err);
-
-    if (err instanceof APIError) {
-        res.status(err.code).json(err.message);
-        return;
-    }
-
     res.status(500).json({ Message : "Something went wrong"})
 })
 
