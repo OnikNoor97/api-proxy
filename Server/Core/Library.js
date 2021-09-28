@@ -5,6 +5,9 @@ module.exports = class Library {
         let query = queryObj.text;
 
         for(let i = 0; i < queryObj.values.length; i++) {
+            if (typeof queryObj.values[i] === 'object') {
+                queryObj.values[i] = JSON.stringify(queryObj.values[i]);
+            }
             query = query.replace(`$${i+1}`.trim(), `'${queryObj.values[i]}'`);
         }
         return query;
