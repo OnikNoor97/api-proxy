@@ -1,4 +1,4 @@
-class APIError {
+module.exports = class APIError {
     constructor(code, message) {
         this.code = code;
         this.message = message;
@@ -16,7 +16,7 @@ class APIError {
         return new APIError(403, msg);
     }
 
-    static notFound(msg) {
-        return new APIError(404, msg);
+    static notFound() {
+        return new APIError(404, "Endpoint not Found");
     }
 }
