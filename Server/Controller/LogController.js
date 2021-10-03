@@ -12,13 +12,10 @@ module.exports = class LogController {
             queryParams: req.query,
             body: req.body,
         }
-        try { 
-            let check = await new LogDto().create(values)
-            return next();
-        }
-        catch(err) { throw new Error(err) }
-    }
 
+        await new LogDto().create(values)
+        return next();
+    }
     static async readLog(req, res, next) {
         let results = await new LogDto().read(req.query);
         res.status(200).json(results);
