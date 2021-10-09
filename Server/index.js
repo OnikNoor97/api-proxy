@@ -14,9 +14,8 @@ app.get("/admin/log", async (req, res, next) => await LogController.readLog(req,
 // Proxy CRUD
 app.post("/admin/proxy", async (req, res, next) => await ProxyController.createProxy(req, res, next))
 app.get("/admin/proxy", async (req, res, next) => await ProxyController.readProxy(req, res, next))
-app.put("/admin/proxy", async (req, res, next) => await ProxyController.updateProxy(req, res, next))
-app.delete("/admin/proxy", async (req, res, next) => await ProxyController.deleteProxy(req, res, next))
 app.put("/admin/proxy/:proxyId", async (req, res, next) => await ProxyController.updateProxy(req, res, next))
+app.delete("/admin/proxy/:proxyId", async (req, res, next) => await ProxyController.deleteProxy(req, res, next))
 
 // Log everything that comes in 
 app.use("*", async (req, res, next) => await LogController.createLog(req, res, next));

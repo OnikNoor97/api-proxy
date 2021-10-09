@@ -27,7 +27,11 @@ module.exports = class ProxyController {
     }
 
     static async deleteProxy(req, res, next) {
-        return next(APIError.badRequest("To be implemented"))
+        let id = req.params.proxyId;
+        if (id == null) return next(APIError.badRequest("Id is required"))
+
+        await new proxyDto().delete(id);
+        res.status(200).json({ Message: "Proxy has been removed" })
     }
 
     static async applyProxy(req, res, next) {
