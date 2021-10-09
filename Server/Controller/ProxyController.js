@@ -1,6 +1,7 @@
 const axios = require('axios');
 const APIError = require('../Core/APIError');
 const proxyDto = require('../Dto/ProxyDto');
+const _ = require('underscore');
 
 module.exports = class ProxyController {
     static async createProxy(req, res, next) {
@@ -13,7 +14,16 @@ module.exports = class ProxyController {
     }
 
     static async updateProxy(req, res, next) {
-        return next(APIError.badRequest("To be implemented"))
+        let id = req.params.proxyId;
+        if (id == null) return next(APIError.badRequest("Id is required"))
+
+        if (_.isEmpty(req.body)) return next(APIError.badRequest("JSON must be filled"))
+        
+        let proxyDetails = await new proxyDto().read({ proxyId : id });
+        if (_.isEmpty(proxyDetails)) return next(APIError.badRequest("Proxy does not exist"))
+        
+        await new proxyDto().update(req.body, id);
+        res.status(200).json({ Message: "Proxy has been successfully edited"})
     }
 
     static async deleteProxy(req, res, next) {

@@ -1,5 +1,6 @@
 const Library = require("../Core/Library");
 const BaseDto = require("./BaseDto");
+const _ = require('underscore');
 
 module.exports = class ProxyDto extends BaseDto {
     constructor() {
@@ -18,5 +19,11 @@ module.exports = class ProxyDto extends BaseDto {
         conditions = conditions ?? ""
         let query = Library.queryObjectToQuery(this.sql.select(this.tableName, this.columns).where(conditions));
         return await this.db.read(query)
+    }
+
+    async update(data, id) {
+        let validData = _.pick(data, this.columns);
+        let query = Library.queryObjectToQuery(this.sql.update(this.tableName, validData).where({ proxyId: id }))
+        return await this.db.update(query);
     }
 }
