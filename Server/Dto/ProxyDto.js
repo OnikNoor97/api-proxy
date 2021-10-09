@@ -22,7 +22,8 @@ module.exports = class ProxyDto extends BaseDto {
     }
 
     async update(data, id) {
-        let validData = _.pick(data, this.columns);
+        let columns = _.without(this.columns, "proxyId")
+        let validData = _.pick(data, columns);
         let query = Library.queryObjectToQuery(this.sql.update(this.tableName, validData).where({ proxyId: id }))
         return await this.db.update(query);
     }
