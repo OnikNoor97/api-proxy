@@ -8,7 +8,8 @@ module.exports = class ProxyController {
     }
 
     static async readProxy(req, res, next) {
-        return next(APIError.badRequest("To be implemented"))
+        let proxyDetails = await new proxyDto().read();
+        return res.status(200).json(proxyDetails);
     }
 
     static async updateProxy(req, res, next) {

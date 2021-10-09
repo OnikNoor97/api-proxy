@@ -15,6 +15,7 @@ module.exports = class ProxyDto extends BaseDto {
     }
 
     async read(conditions) {
+        conditions = conditions ?? ""
         let query = Library.queryObjectToQuery(this.sql.select(this.tableName, this.columns).where(conditions));
         return await this.db.read(query)
     }
