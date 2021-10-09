@@ -10,8 +10,10 @@ module.exports = class ProxyDto extends BaseDto {
         return this;
     }
 
-    async create(values) {
-        let query = Library.queryObjectToQuery(this.sql.insert(this.tableName, values));
+    async create(data) {
+        let columns = _.without(this.columns, "proxyId")
+        let validData = _.pick(data, columns);
+        let query = Library.queryObjectToQuery(this.sql.insert(this.tableName, validData));
         return await this.db.create(query);
     }
 

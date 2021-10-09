@@ -5,7 +5,15 @@ const _ = require('underscore');
 
 module.exports = class ProxyController {
     static async createProxy(req, res, next) {
-        return next(APIError.badRequest("To be implemented"))
+        if (_.isEmpty(req.body)) return next(APIError.badRequest("JSON must be filled"))
+        if (!_.has(req.body, "name")) return next(APIError.badRequest("Name is missing"))
+        if (!_.has(req.body, "proxyUrl")) return next(APIError.badRequest("proxyUrl is missing"))
+        if (!_.has(req.body, "proxyIp")) return next(APIError.badRequest("proxyIp is missing"))
+        if (!_.has(req.body, "proxyPort")) return next(APIError.badRequest("proxyPort is missing"))
+        if (!_.has(req.body, "isService")) return next(APIError.badRequest("isService is missing"))
+
+        await new proxyDto().create(req.body);
+        return res.status(200).json({ Message: "Proxy has been created" });
     }
 
     static async readProxy(req, res, next) {
