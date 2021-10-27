@@ -7,6 +7,9 @@ const APIError = require("./Core/APIError");
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+// Simple check to confirm Server side is working correctly
+app.get("/", (req, res) => res.status(200).json({ Message: "Server is working correctly" }));
+
 // Log request coming in 
 app.use("*", async (req, res, next) => await LogController.createLog(req, res, next));
 
