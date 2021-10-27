@@ -1,25 +1,26 @@
 {
-  "name": "apiproxy",
-  "version": "1.0.0",
-  "description": "An API Proxy to allow all my APIs to work within my network, also logs every request coming in for debug purposes",
-  "main": "index.js",
+  "name": "api-proxy",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "npm build",
+    "dev": "next dev",
+    "build": "next build && npm build",
+    "start": "next start && node index",
+    "lint": "next lint",
     "clean": "rm -rf node_modules",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
-    "start": "node index",
-    "dev": "nodemon Server/index",
     "debug": "nodemon --inspect Server/index.js",
     "test": "jest --coverage"
   },
-  "author": "Onik Noor",
-  "license": "ISC",
-  "devDependencies": {
-    "jest": "^27.2.1",
-    "nodemon": "^2.0.6"
-  },
   "dependencies": {
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
     "bootstrap": "^5.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -30,6 +31,8 @@
     "react-bootstrap": "^2.0.0-rc.0",
     "serve-favicon": "^2.5.0",
     "sql-query-generator": "^1.4.2",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "jest": "^27.2.1",
+    "nodemon": "^2.0.6"
   }
 }
