@@ -1,4 +1,4 @@
-import { Container, Footer, Main, Title } from "./styles";
+import { Container, Footer, Main, Title } from "components/styles.tsx";
 
 import Head from "next/head";
 import React from "react";
