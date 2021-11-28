@@ -1,23 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 `;
 Container.displayName = "Container";
 
 export const Main = styled.div`
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  padding: 0;
   justify-content: center;
   align-items: center;
+  padding: 24px;
 `;
 Main.displayName = "Main";
 
@@ -41,7 +36,7 @@ Footer.displayName = "Footer";
 export const Title = styled.div`
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 2rem;
   text-align: center;
 
   a {
