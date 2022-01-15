@@ -9,6 +9,21 @@ import Table from "react-bootstrap/Table";
 const mockData = [
   {
     id: "1",
+    source: "192.168.0.1",
+    destination: "192.168.0.2",
+    status: "online",
+  },
+  {
+    id: "2",
+    source: "192.168.0.3",
+    destination: "192.168.0.4",
+    status: "disabled",
+  },
+  {
+    id: "32",
+    source: "192.168.1.254",
+    destination: "192.168.1.9",
+    status: "online",
   },
 ];
 
@@ -16,56 +31,39 @@ export default function TableComponent() {
   return (
     <Container>
       <Head>
-        <title>API Proxy</title>
+        <title>OTAL API Proxy</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Main>
-        <Title>
-          Welcome to our API proxy, <a href="https://nextjs.org">Onik!</a>
-        </Title>
+        <Title>OTAL API proxy</Title>
       </Main>
 
       <div>
-        <Table responsive="md">
+        <Table
+          responsive="sm"
+          width="500"
+          style={{ whiteSpace: "nowrap", wordWrap: "break-word" }}
+        >
           <thead>
             <tr>
-              <th>#</th>
+              <th></th>
               <th>Source</th>
               <th>Destination</th>
               <th>Status</th>
-              <th>Edit</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>
+          {mockData.map((data, id, source, destination, status, key) => (
+            <tbody>
+              <tr key={id}>
+                <td>{data.id}</td>
+                <td>{data.source}</td>
+                <td>{data.destination}</td>
+                <td>{data.status}</td>
                 <Button>Edit</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>
-                <Button>Edit</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>Table cell</td>
-              <td>
-                <Button>Edit</Button>
-              </td>
-            </tr>
-          </tbody>
+              </tr>
+            </tbody>
+          ))}
         </Table>
       </div>
       <Footer>OTAL &copy; 2021</Footer>

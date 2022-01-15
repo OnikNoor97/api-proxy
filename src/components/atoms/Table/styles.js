@@ -23,6 +23,8 @@ export const Footer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0;
 
   a {
     display: flex;
