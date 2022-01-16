@@ -1,7 +1,5 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 
-import { FaUserCircle } from "react-icons/fa";
-import Head from "next/head";
 import ModalComponent from "./Modal/ModalComponent";
 
 const people = [
@@ -26,6 +24,13 @@ const people = [
 interface Props {}
 
 export default function TableComponent({}: Props): ReactElement {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setShowModal((prev) => !prev);
+  };
+
   return (
     <div className="flex flex-col mx-20 mt-20">
       <h1 className="mb-10 mx-auto text-3xl font-bold">OTAL API PROXY</h1>
@@ -102,11 +107,13 @@ export default function TableComponent({}: Props): ReactElement {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <a
-                        href="#"
+                        href=""
                         className="text-indigo-600 hover:text-indigo-900"
+                        onClick={handleClick}
                       >
                         Edit
                       </a>
+                      {showModal === true && <ModalComponent />}
                     </td>
                   </tr>
                 ))}
