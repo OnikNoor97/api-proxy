@@ -1,1 +1,0 @@
-Delete this txt file once you do your React / Next .js changes -> Added this to ensure the folder has been commited in
