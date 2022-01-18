@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 
+import { BsThreeDotsVertical } from "react-icons/bs";
 import ModalComponent from "./Modal/ModalComponent";
 
 const people = [
@@ -101,17 +102,23 @@ export default function TableComponent({}: Props): ReactElement {
                       {person.destination}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        {person.status}
-                      </span>
+                      {person.status === "disabled" ? (
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-600 text-white">
+                          {person.status}
+                        </span>
+                      ) : (
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                          {person.status}
+                        </span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <a
                         href=""
-                        className="text-indigo-600 hover:text-indigo-900"
+                        className="text-grey-600 hover:text-grey-900"
                         onClick={handleClick}
                       >
-                        Edit
+                        <BsThreeDotsVertical />
                       </a>
                       {showModal === true && <ModalComponent />}
                     </td>
