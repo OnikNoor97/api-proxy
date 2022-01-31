@@ -2,6 +2,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html,
+body {
+  background-color: #18181b;
+}
+
 .container {
   display: flex;
   flex-direction: column;

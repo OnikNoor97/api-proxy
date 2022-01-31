@@ -34,34 +34,36 @@ export default function TableComponent({}: Props): ReactElement {
 
   return (
     <div className="flex flex-col mx-20 mt-20">
-      <h1 className="mb-10 mx-auto text-3xl font-bold">OTAL API PROXY</h1>
+      <h1 className="mb-10 mx-auto text-3xl font-bold text-gray-200">
+        OTAL API PROXY
+      </h1>
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+          <div className="bg-gray-800 overflow-hidden border-white-200 sm:rounded-lg">
+            <table className="bg-gray-800 min-w-full divide-y divide-gray-600">
+              <thead className="bg-gray-800">
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     Source
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     Destination
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     Status
                   </th>
@@ -72,7 +74,7 @@ export default function TableComponent({}: Props): ReactElement {
                 </tr>
               </thead>
 
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-gray-800 divide-y divide-gray-700">
                 {people.map((person) => (
                   <tr key={person.source}>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -85,20 +87,18 @@ export default function TableComponent({}: Props): ReactElement {
                           />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
+                          <div className="text-sm font-medium text-white">
                             {person.name}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
-                        {person.source}
-                      </div>
-                      <div className="text-sm text-gray-500">{person.date}</div>
+                      <div className="text-sm text-white">{person.source}</div>
+                      <div className="text-sm text-white">{person.date}</div>
                     </td>
 
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       {person.destination}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -115,7 +115,7 @@ export default function TableComponent({}: Props): ReactElement {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <a
                         href=""
-                        className="text-grey-600 hover:text-grey-900"
+                        className="text-white hover:text-grey-900"
                         onClick={handleClick}
                       >
                         <BsThreeDotsVertical />
