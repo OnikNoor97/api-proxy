@@ -4,6 +4,7 @@ node_modules
 Auth/Database.sql
 db_data
 coverage
+Client/.next/*
 
 # dependencies
 /node_modules
